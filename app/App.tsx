@@ -52,7 +52,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl mb-4 text-gray-900">
-              Por que escolher nossos serviços?
+              Por que escolher meus serviços?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Entendemos as necessidades de quem está iniciando no serviço público
@@ -98,7 +98,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl mb-4 text-gray-900">
-              Nossos Serviços
+              Meus Serviços
             </h2>
             <p className="text-xl text-gray-600">
               Suporte completo em todas as etapas da sua posse
