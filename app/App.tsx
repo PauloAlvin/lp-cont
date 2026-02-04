@@ -1,9 +1,13 @@
 import { Calculator, FileCheck, Users, Clock, Award, Phone, Mail, FileText, CircleCheck, MessageCircle } from 'lucide-react';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
+import { Navbar } from './components/Navbar';
 
 export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-50">
+       {/* Navbar */}
+      <Navbar />
+
       {/* Header/Hero Section */}
       <header className="relative bg-gradient-to-r from-slate-600 to-slate-700 text-white overflow-hidden">
         {/* Background Image with Gradient Overlay */}
