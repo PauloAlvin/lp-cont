@@ -2,5 +2,18 @@
   "buildCommand": "",
   "outputDirectory": "dist",
   "installCommand": "",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mapa.paulowilliam.com.br"
+        }
+      ],
+      "destination": "https://alaska-hospital-championships-blank.trycloudflare.com/$1",
+      "permanent": false
+    }
+  ]
 }
