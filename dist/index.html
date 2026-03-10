@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Contador Paulo Alvin - IRPF 2026</title>
+<title>Contador Silva - IRPF 2026</title>
+<script>window.TAILWIND_DISABLE_TOUCH = true</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -105,7 +106,7 @@
              class="bg-primary text-background-dark px-8 py-4 rounded-xl font-bold text-lg hover:bg-accent-gold transition-all shadow-lg shadow-primary/20 inline-block">
             Agendar Consultoria
           </a>
-          <button class="border border-white/20 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all">Saiba Mais</button>
+          <a href="#servicos" class="border border-white/20 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all inline-block">Saiba Mais</a>
         </div>
       </div>
 
@@ -291,30 +292,42 @@
         <h2 class="text-primary font-bold uppercase tracking-widest text-sm mb-4">Dúvidas Frequentes</h2>
         <h3 class="text-4xl font-extrabold">FAQ - IRPF 2026</h3>
       </div>
-      <div class="space-y-4">
-        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
-          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+      <div class="space-y-4" id="faq-list">
+        <div class="faq-item border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
             <span class="font-bold">Quais documentos são necessários para começar?</span>
-            <span class="material-symbols-outlined text-primary">expand_more</span>
+            <span class="material-symbols-outlined text-primary transition-transform duration-300">expand_more</span>
           </button>
+          <div class="faq-answer hidden px-6 pt-2 pb-5 text-slate-400 text-sm leading-relaxed">
+            São necessários: acesso ao gov.br (para baixar a declaração pré-preenchida), comprovante de rendimentos (informe de rendimentos do empregador ou pró-labore), extratos bancários, informe de rendimentos de investimentos, comprovantes de despesas dedutíveis (saúde, educação, dependentes) e, se aplicável, documentação de bens imóveis ou veículos.
+          </div>
         </div>
-        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
-          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+        <div class="faq-item border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
             <span class="font-bold">Como funciona o atendimento à distância?</span>
-            <span class="material-symbols-outlined text-primary">expand_more</span>
+            <span class="material-symbols-outlined text-primary transition-transform duration-300">expand_more</span>
           </button>
+          <div class="faq-answer hidden px-6 pt-2 pb-5 text-slate-400 text-sm leading-relaxed">
+            Todo o processo é 100% digital e seguro. Você envia os documentos pelo WhatsApp ou e-mail, realizamos uma videochamada para alinhamento e enviamos a declaração para sua revisão antes do envio à Receita Federal. Atendemos clientes em todo o Brasil e no exterior.
+          </div>
         </div>
-        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
-          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+        <div class="faq-item border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
             <span class="font-bold">Qual o prazo médio para entrega da declaração?</span>
-            <span class="material-symbols-outlined text-primary">expand_more</span>
+            <span class="material-symbols-outlined text-primary transition-transform duration-300">expand_more</span>
           </button>
+          <div class="faq-answer hidden px-6 pt-2 pb-5 text-slate-400 text-sm leading-relaxed">
+            Após o recebimento de toda a documentação, o prazo médio é de 3 a 5 dias úteis para declarações simples, e de 7 a 10 dias úteis para casos mais complexos, como investidores com múltiplos ativos ou profissionais com Livro Caixa.
+          </div>
         </div>
-        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
-          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+        <div class="faq-item border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
             <span class="font-bold">Vocês atendem investidores de criptomoedas?</span>
-            <span class="material-symbols-outlined text-primary">expand_more</span>
+            <span class="material-symbols-outlined text-primary transition-transform duration-300">expand_more</span>
           </button>
+          <div class="faq-answer hidden px-6 pt-2 pb-5 text-slate-400 text-sm leading-relaxed">
+            Sim! Somos especializados em ganho de capital com criptoativos. Calculamos o imposto sobre cada operação, organizamos o histórico de transações e garantimos conformidade total com as normas da Receita Federal para Bitcoin, Ethereum e demais ativos digitais.
+          </div>
         </div>
       </div>
     </div>
@@ -426,6 +439,28 @@
 
 <!-- EmailJS + formulário + countdown -->
 <script>
+  // ─── FAQ ACCORDION ──────────────────────────────────────────────────────────
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item   = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const icon   = btn.querySelector('.material-symbols-outlined');
+      const isOpen = !answer.classList.contains('hidden');
+
+      // Fecha todos
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.querySelector('.faq-answer').classList.add('hidden');
+        i.querySelector('.material-symbols-outlined').style.transform = 'rotate(0deg)';
+      });
+
+      // Abre o clicado (se estava fechado)
+      if (!isOpen) {
+        answer.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+
   // ─── EMAILJS ────────────────────────────────────────────────────────────────
   // 1. Crie conta gratuita em https://www.emailjs.com
   // 2. Crie um Email Service (Gmail, Outlook, etc.) e copie o SERVICE ID
@@ -433,9 +468,9 @@
   //    Variáveis usadas no template: {{from_name}}, {{reply_to}}, {{message}}
   // 4. Copie sua PUBLIC KEY (Account > API Keys)
   // 5. Substitua os três valores abaixo:
-  const EMAILJS_PUBLIC_KEY  = 'AWv-LWQcF2kZsTS_P'; 
-  const EMAILJS_SERVICE_ID  = 'service_ffqcskj'; 
-  const EMAILJS_TEMPLATE_ID = 'template_vy01p54';  
+  const EMAILJS_PUBLIC_KEY  = 'SUA_PUBLIC_KEY_AQUI';   // ex: 'aBcDeFgHiJkLmNoP'
+  const EMAILJS_SERVICE_ID  = 'SEU_SERVICE_ID_AQUI';   // ex: 'service_xxxxxxx'
+  const EMAILJS_TEMPLATE_ID = 'SEU_TEMPLATE_ID_AQUI';  // ex: 'template_xxxxxxx'
 
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
