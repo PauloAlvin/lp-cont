@@ -1,14 +1,504 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Contabilidade e Assessoria para PF e PJ">
-    <title>Contabilidade - Paulo William Alvin</title>
-    <script type="module" crossorigin src="/assets/index-C4Rzn79J.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BcdHZO5C.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contador Silva - IRPF 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#f4c025",
+          "background-light": "#f8f8f5",
+          "background-dark": "#0d1109",
+          "surface-dark": "#1a1f14",
+          "accent-gold": "#d4a017"
+        },
+        fontFamily: { "display": ["Manrope", "sans-serif"] },
+        borderRadius: {
+          "DEFAULT": "0.25rem", "lg": "0.5rem",
+          "xl": "0.75rem", "full": "9999px"
+        },
+      },
+    },
+  }
+</script>
+<style type="text/tailwindcss">
+  body { font-family: 'Manrope', sans-serif; }
+  .glass-effect {
+    background: rgba(26, 31, 20, 0.8);
+    backdrop-filter: blur(12px);
+  }
+  .timer-box {
+    @apply flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-lg p-3 min-w-[70px];
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased selection:bg-primary/30">
+
+<header class="fixed top-0 w-full z-50 border-b border-white/10 glass-effect">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+      <h2 class="text-xl font-extrabold tracking-tight">Contador <span class="text-primary">Paulo William Alvin</span></h2>
+    </div>
+    <nav class="hidden md:flex items-center gap-10">
+      <a class="text-sm font-semibold hover:text-primary transition-colors" href="#servicos">Serviços</a>
+      <a class="text-sm font-semibold hover:text-primary transition-colors" href="#sobre">Sobre</a>
+      <a class="text-sm font-semibold hover:text-primary transition-colors" href="#depoimentos">Depoimentos</a>
+      <a class="text-sm font-semibold hover:text-primary transition-colors" href="#faq">FAQ</a>
+      <a class="text-sm font-semibold hover:text-primary transition-colors" href="#contato">Contato</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="https://wa.me/5565999163045" target="_blank" rel="noopener"
+         class="hidden sm:flex bg-primary text-background-dark px-6 py-2.5 rounded-lg font-bold text-sm items-center gap-2 hover:bg-accent-gold transition-all">
+        <span class="material-symbols-outlined text-lg">chat</span> WhatsApp
+      </a>
+      <button class="md:hidden text-white"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="pt-20">
+
+  <!-- HERO SECTION -->
+  <section class="relative min-h-[85vh] flex items-center overflow-hidden px-6">
+    <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+      <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/20 blur-[120px] rounded-full"></div>
+      <div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-primary/10 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div class="space-y-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          Agenda aberta para 2026
+        </div>
+        <h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight">
+          Não deixe seu IRPF 2026 para a <span class="text-primary">última hora</span>
+        </h1>
+        <div class="space-y-4 pt-2">
+          <p class="text-sm font-bold uppercase tracking-widest text-primary/80 flex items-center gap-2">
+            <span class="material-symbols-outlined text-sm">schedule</span> Prazo encerra em:
+          </p>
+          <div class="flex gap-3">
+            <div class="timer-box"><span class="text-2xl font-bold text-white" id="t-days">--</span><span class="text-[10px] uppercase text-slate-500 font-bold">Dias</span></div>
+            <div class="timer-box"><span class="text-2xl font-bold text-white" id="t-hours">--</span><span class="text-[10px] uppercase text-slate-500 font-bold">Horas</span></div>
+            <div class="timer-box"><span class="text-2xl font-bold text-white" id="t-min">--</span><span class="text-[10px] uppercase text-slate-500 font-bold">Minutos</span></div>
+            <div class="timer-box"><span class="text-2xl font-bold text-white" id="t-sec">--</span><span class="text-[10px] uppercase text-slate-500 font-bold">Segundos</span></div>
+          </div>
+        </div>
+        <p class="text-lg text-slate-400 max-w-xl leading-relaxed">
+          Segurança e confiança para sua declaração com atendimento personalizado e sigilo absoluto. Evite a malha fina com assessoria executiva.
+        </p>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <a href="https://wa.me/5565999163045" target="_blank" rel="noopener"
+             class="bg-primary text-background-dark px-8 py-4 rounded-xl font-bold text-lg hover:bg-accent-gold transition-all shadow-lg shadow-primary/20 inline-block">
+            Agendar Consultoria
+          </a>
+          <button class="border border-white/20 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all">Saiba Mais</button>
+        </div>
+      </div>
+
+      <!-- IMAGEM HERO (escritório) — descomentar quando tiver a foto
+      <div class="relative hidden lg:block">
+        <div class="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-surface-dark group relative">
+          <div class="absolute inset-0 bg-gradient-to-tr from-background-dark via-transparent to-transparent z-10"></div>
+          <img alt="Professional desk with calculator and laptop"
+               class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+               src="COLOQUE_A_URL_DA_FOTO_AQUI"/>
+        </div>
+        <div class="absolute -bottom-6 -left-6 glass-effect p-6 rounded-xl border border-white/10 shadow-2xl">
+          <div class="flex items-center gap-4">
+            <div class="size-12 bg-primary/20 rounded-full flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary">verified_user</span>
+            </div>
+            <div>
+              <p class="text-sm font-bold">CRC Ativo</p>
+              <p class="text-xs text-slate-400">Regularidade Profissional</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="py-24 px-6 bg-surface-dark/30" id="servicos">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 space-y-4">
+        <h2 class="text-primary font-bold uppercase tracking-widest text-sm">Especialidades</h2>
+        <h3 class="text-4xl font-extrabold">Soluções Contábeis de Alta Performance</h3>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-8 rounded-2xl border border-white/5 bg-surface-dark hover:border-primary/50 transition-all group">
+          <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+            <span class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">description</span>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Declaração Completa</h4>
+          <p class="text-slate-400 text-sm leading-relaxed">Análise minuciosa de todos os seus rendimentos, bens e direitos para otimização do imposto a pagar ou restituir.</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/5 bg-surface-dark hover:border-primary/50 transition-all group">
+          <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+            <span class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">policy</span>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Malha Fina</h4>
+          <p class="text-slate-400 text-sm leading-relaxed">Suporte estratégico para regularizar pendências, responder notificações da Receita e evitar multas pesadas.</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/5 bg-surface-dark hover:border-primary/50 transition-all group">
+          <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+            <span class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">trending_up</span>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Ganho de Capital</h4>
+          <p class="text-slate-400 text-sm leading-relaxed">Cálculo preciso de impostos sobre a venda de ativos financeiros, criptoativos e imóveis com foco em redução legal.</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/5 bg-surface-dark hover:border-primary/50 transition-all group">
+          <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+            <span class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">business_center</span>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Autônomos</h4>
+          <p class="text-slate-400 text-sm leading-relaxed">Livro Caixa e carnê-leão para profissionais liberais, garantindo conformidade total com a legislação vigente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="py-24 px-6" id="sobre">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+      <div class="order-2 lg:order-1">
+        <h2 class="text-primary font-bold uppercase tracking-widest text-sm mb-4">Sobre o Profissional</h2>
+        <h3 class="text-4xl font-extrabold mb-6">Expertise que Transforma Complexidade em Segurança</h3>
+        <div class="space-y-6 text-slate-400 leading-relaxed">
+          <p>Com mais de 10 anos de atuação no mercado contábil, o Contador Paulo William Alvin especializou-se em planejamento tributário para pessoas físicas de alta renda e investidores.</p>
+          <p>Nossa missão é proporcionar tranquilidade absoluta aos nossos clientes, garantindo que cada centavo seja declarado corretamente e cada dedução legal seja aproveitada ao máximo.</p>
+          <ul class="space-y-4 pt-4">
+            <li class="flex items-center gap-3 text-slate-100 font-medium">
+              <span class="material-symbols-outlined text-primary">check_circle</span> Especialista em Direito Tributário
+            </li>
+            <li class="flex items-center gap-3 text-slate-100 font-medium">
+              <span class="material-symbols-outlined text-primary">check_circle</span> Atendimento 100% Digital e Seguro
+            </li>
+            <li class="flex items-center gap-3 text-slate-100 font-medium">
+              <span class="material-symbols-outlined text-primary">check_circle</span> Consultoria para Residentes no Exterior
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FOTO DO CONTADOR (retrato profissional) — descomentar quando tiver a foto
+      <div class="order-1 lg:order-2">
+        <div class="relative group">
+          <div class="absolute -inset-4 bg-primary/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <img alt="Contador Paulo Professional Portrait"
+               class="relative rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover aspect-[4/5]"
+               src="COLOQUE_A_URL_DA_FOTO_AQUI"/>
+        </div>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="py-24 px-6 border-t border-white/5" id="depoimentos">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 space-y-4">
+        <h2 class="text-primary font-bold uppercase tracking-widest text-sm">Depoimentos</h2>
+        <h3 class="text-4xl font-extrabold">O que dizem meus clientes</h3>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-8 rounded-2xl bg-surface-dark border border-white/5 flex flex-col justify-between">
+          <div>
+            <div class="flex gap-1 mb-6">
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+            </div>
+            <p class="text-slate-300 italic mb-8 leading-relaxed">"O processo foi extremamente tranquilo. Pela primeira vez em anos, tive a certeza de que minha declaração estava impecável e aproveitei todas as deduções legais."</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+              <span class="text-primary font-bold text-sm">RC</span>
+            </div>
+            <div>
+              <p class="font-bold text-white">Ricardo Camargo</p>
+              <p class="text-xs text-slate-500 uppercase">Empresário</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 rounded-2xl bg-surface-dark border border-white/5 flex flex-col justify-between">
+          <div>
+            <div class="flex gap-1 mb-6">
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+            </div>
+            <p class="text-slate-300 italic mb-8 leading-relaxed">"Excelente assessoria para investidores. Conseguiu organizar todo o meu histórico de criptoativos e ações com uma clareza que eu nunca tinha visto."</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+              <span class="text-primary font-bold text-sm">AM</span>
+            </div>
+            <div>
+              <p class="font-bold text-white">Ana Mendes</p>
+              <p class="text-xs text-slate-500 uppercase">Investidora</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 rounded-2xl bg-surface-dark border border-white/5 flex flex-col justify-between">
+          <div>
+            <div class="flex gap-1 mb-6">
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+              <span class="material-symbols-outlined text-primary fill-1">star</span>
+            </div>
+            <p class="text-slate-300 italic mb-8 leading-relaxed">"Atendimento premium e muito ágil. Tirou todas as minhas dúvidas sobre o carnê-leão e agora trabalho com muito mais segurança fiscal."</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+              <span class="text-primary font-bold text-sm">GS</span>
+            </div>
+            <div>
+              <p class="font-bold text-white">Gabriel Soares</p>
+              <p class="text-xs text-slate-500 uppercase">Médico Autônomo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 px-6 bg-surface-dark/30" id="faq">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-primary font-bold uppercase tracking-widest text-sm mb-4">Dúvidas Frequentes</h2>
+        <h3 class="text-4xl font-extrabold">FAQ - IRPF 2026</h3>
+      </div>
+      <div class="space-y-4">
+        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+            <span class="font-bold">Quais documentos são necessários para começar?</span>
+            <span class="material-symbols-outlined text-primary">expand_more</span>
+          </button>
+        </div>
+        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+            <span class="font-bold">Como funciona o atendimento à distância?</span>
+            <span class="material-symbols-outlined text-primary">expand_more</span>
+          </button>
+        </div>
+        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+            <span class="font-bold">Qual o prazo médio para entrega da declaração?</span>
+            <span class="material-symbols-outlined text-primary">expand_more</span>
+          </button>
+        </div>
+        <div class="border border-white/10 rounded-xl overflow-hidden bg-background-dark">
+          <button class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+            <span class="font-bold">Vocês atendem investidores de criptomoedas?</span>
+            <span class="material-symbols-outlined text-primary">expand_more</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER / CONTACT -->
+  <footer class="py-24 px-6 border-t border-white/5" id="contato">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-20">
+        <div class="space-y-12">
+          <div>
+            <div class="flex items-center gap-3 mb-6">
+              <span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+              <h2 class="text-2xl font-extrabold tracking-tight">Contador <span class="text-primary">Paulo William Alvin</span></h2>
+            </div>
+            <p class="text-slate-400 max-w-sm">Pronto para assumir o controle total das suas obrigações fiscais com excelência.</p>
+          </div>
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-xl">mail</span>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Email</p>
+                <p class="font-medium"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9bab6b7adb8adb699bab6b7adb8bdb6abaab0b5afb8f7bab6b4f7bbab">[email&#160;protected]</a></p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-xl">call</span>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Telefone</p>
+                <p class="font-medium">+55 (11) 98765-4321</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-xl">location_on</span>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Localização</p>
+                <p class="font-medium">São Paulo, SP - Atendimento Nacional</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-surface-dark p-8 rounded-2xl border border-white/5">
+          <h4 class="text-2xl font-bold mb-8">Envie uma mensagem</h4>
+          <form id="contact-form" class="space-y-4" novalidate>
+            <div>
+              <label class="block text-sm font-medium mb-2 text-slate-400">Nome Completo</label>
+              <input id="form-name" name="from_name" required
+                class="w-full bg-background-dark border-white/10 rounded-lg focus:border-primary focus:ring-primary text-white placeholder:text-slate-600"
+                placeholder="Seu nome" type="text"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2 text-slate-400">E-mail</label>
+              <input id="form-email" name="reply_to" required
+                class="w-full bg-background-dark border-white/10 rounded-lg focus:border-primary focus:ring-primary text-white placeholder:text-slate-600"
+                placeholder="seu@email.com" type="email"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2 text-slate-400">Mensagem</label>
+              <textarea id="form-message" name="message" required rows="4"
+                class="w-full bg-background-dark border-white/10 rounded-lg focus:border-primary focus:ring-primary text-white placeholder:text-slate-600"
+                placeholder="Como podemos ajudar?"></textarea>
+            </div>
+            <button id="submit-btn" type="submit"
+              class="w-full bg-primary text-background-dark font-bold py-4 rounded-lg hover:bg-accent-gold transition-all mt-4 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              <span id="submit-label">Enviar Solicitação</span>
+              <svg id="submit-spinner" class="hidden animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- MODAL DE CONFIRMAÇÃO -->
+        <div id="success-modal"
+          class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm hidden"
+          role="dialog" aria-modal="true">
+          <div class="bg-surface-dark border border-white/10 rounded-2xl p-10 max-w-sm w-full mx-4 text-center shadow-2xl">
+            <div class="size-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <span class="material-symbols-outlined text-primary text-4xl">check_circle</span>
+            </div>
+            <h3 class="text-2xl font-extrabold mb-2">Mensagem enviada!</h3>
+            <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+              Obrigado pelo contato. Retornaremos em breve pelo e-mail informado.
+            </p>
+            <button onclick="document.getElementById('success-modal').classList.add('hidden')"
+              class="bg-primary text-background-dark font-bold px-8 py-3 rounded-lg hover:bg-accent-gold transition-all w-full">
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mt-24 pt-8 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4 text-slate-500 text-xs font-medium">
+        <p>© 2026 Contador Paulo William Alvin - Todos os direitos reservados.</p>
+        <div class="flex gap-8">
+          <a class="hover:text-primary" href="#">Privacidade</a>
+          <a class="hover:text-primary" href="#">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- EmailJS + formulário + countdown -->
+<script>
+  // ─── EMAILJS ────────────────────────────────────────────────────────────────
+  // 1. Crie conta gratuita em https://www.emailjs.com
+  // 2. Crie um Email Service (Gmail, Outlook, etc.) e copie o SERVICE ID
+  // 3. Crie um Email Template e copie o TEMPLATE ID
+  //    Variáveis usadas no template: {{from_name}}, {{reply_to}}, {{message}}
+  // 4. Copie sua PUBLIC KEY (Account > API Keys)
+  // 5. Substitua os três valores abaixo:
+  const EMAILJS_PUBLIC_KEY  = 'AWv-LWQcF2kZsTS_P'; 
+  const EMAILJS_SERVICE_ID  = 'service_ffqcskj'; 
+  const EMAILJS_TEMPLATE_ID = 'template_vy01p54';  
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('form-name').value.trim();
+    const email   = document.getElementById('form-email').value.trim();
+    const message = document.getElementById('form-message').value.trim();
+
+    if (!name || !email || !message) return;
+
+    const btn     = document.getElementById('submit-btn');
+    const label   = document.getElementById('submit-label');
+    const spinner = document.getElementById('submit-spinner');
+
+    btn.disabled = true;
+    label.textContent = 'Enviando...';
+    spinner.classList.remove('hidden');
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name: name,
+        reply_to:  email,
+        message:   message,
+      });
+      this.reset();
+      document.getElementById('success-modal').classList.remove('hidden');
+    } catch (err) {
+      alert('Erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.');
+      console.error('EmailJS error:', err);
+    } finally {
+      btn.disabled = false;
+      label.textContent = 'Enviar Solicitação';
+      spinner.classList.add('hidden');
+    }
+  });
+
+  // Fechar modal clicando fora
+  document.getElementById('success-modal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.add('hidden');
+  });
+
+  // ─── COUNTDOWN ──────────────────────────────────────────────────────────────
+  const deadline = new Date('2026-06-30T23:59:59');
+  function updateTimer() {
+    const now = new Date();
+    const diff = deadline - now;
+    if (diff <= 0) {
+      ['t-days','t-hours','t-min','t-sec'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('t-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('t-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('t-min').textContent   = String(m).padStart(2,'0');
+    document.getElementById('t-sec').textContent   = String(s).padStart(2,'0');
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+</body>
 </html>
