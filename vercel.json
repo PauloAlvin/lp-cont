@@ -3,6 +3,12 @@
   "outputDirectory": "dist",
   "installCommand": "",
   "framework": null,
+  "rewrites": [
+    {
+      "source": "/simulador-fator-r",
+      "destination": "/simulador-fator-r.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
@@ -10,7 +16,7 @@
         {
           "type": "host",
           "value": "mapa.paulowilliam.com.br"
-        }
+      }
       ],
       "destination": "https://parking-perfume-arm-mart.trycloudflare.com/$1",
       "permanent": false
