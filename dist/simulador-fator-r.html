@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Fator R - Estudo Tributário</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --primary: #1F4E78;
+            --success: #2e7d32;
+            --danger: #c62828;
+            --success-bg: #e8f5e9;
+            --danger-bg: #ffebee;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dashboard {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        h2 { margin-top: 0; color: var(--primary); text-align: center; }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .input-group input {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Régua / Gráfico de Barra */
+        .gauge-container {
+            margin: 30px 0;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .gauge-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .gauge-track {
+            width: 100%;
+            height: 24px;
+            background-color: #ddd;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 12px 0 0 12px;
+            transition: width 0.4s ease, background-color 0.4s ease;
+        }
+
+        .gauge-marker {
+            position: absolute;
+            left: 28%;
+            top: -5px;
+            bottom: -5px;
+            width: 2px;
+            background-color: #000;
+            z-index: 10;
+        }
+        
+        .gauge-marker::after {
+            content: '28%';
+            position: absolute;
+            top: -20px;
+            left: -12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Detalhamento Tributário */
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .card-total {
+            grid-column: 1 / -1;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+        
+        .card-total .card-title { color: #d0e1f0; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <h2>Simulador Fator R Interativo</h2>
+
+    <div class="input-group">
+        <label for="faturamento">Faturamento Mensal (R$)</label>
+        <input type="number" id="faturamento" value="25000" step="1000">
+    </div>
+
+    <div class="input-group">
+        <label for="prolabore">Pró-labore Mensal (R$)</label>
+        <input type="number" id="prolabore" value="13000" step="500">
+    </div>
+
+    <div class="gauge-container">
+        <div class="gauge-header">
+            <span>Fator R Atual: <span id="fatorR-text">0.00%</span></span>
+            <span id="badge-enquadramento" class="status-badge">Calculando...</span>
+        </div>
+        <div class="gauge-track">
+            <div class="gauge-fill" id="gauge-fill"></div>
+            <div class="gauge-marker"></div>
+        </div>
+    </div>
+
+    <h3 style="margin-top: 30px; margin-bottom: 15px; font-size: 1.1em; color: var(--text-muted);">Detalhamento Tributário (Estimado)</h3>
+    <div class="breakdown-grid">
+        <div class="card">
+            <div class="card-title">Empresa (DAS)</div>
+            <div class="card-value" id="val-das">R$ 0,00</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Sócio (INSS Teto)</div>
+            <div class="card-value" id="val-inss">R$ 0,00</div>
+        </div>
+        <div class="card" style="grid-column: 1 / -1;">
+            <div class="card-title">Sócio (IRPF Retido)</div>
+            <div class="card-value" id="val-irpf">R$ 0,00</div>
+        </div>
+        <div class="card card-total">
+            <div class="card-title">Custo Total Mensal (DAS + INSS + IRPF)</div>
+            <div class="card-value" id="val-total">R$ 0,00</div>
+            <div style="font-size: 0.9em; margin-top: 5px; font-weight: normal;">
+                Alíquota Efetiva Real: <span id="val-efetiva">0%</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const formatCurrency = (val) => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    function calcularTributos() {
+        const fat = parseFloat(document.getElementById('faturamento').value) || 0;
+        const pro = parseFloat(document.getElementById('prolabore').value) || 0;
+        
+        // 1. Fator R
+        const fatorR = fat > 0 ? (pro / fat) * 100 : 0;
+        
+        // Atualiza Régua
+        const fill = document.getElementById('gauge-fill');
+        const fillWidth = Math.min(fatorR, 100); // Trava em 100% visualmente
+        fill.style.width = fillWidth + '%';
+        document.getElementById('fatorR-text').innerText = fatorR.toFixed(2) + '%';
+        
+        const badge = document.getElementById('badge-enquadramento');
+        
+        let das = 0;
+        if (fatorR >= 28) {
+            fill.style.backgroundColor = 'var(--success)';
+            badge.innerText = 'ANEXO III (Econômico)';
+            badge.style.backgroundColor = 'var(--success-bg)';
+            badge.style.color = 'var(--success)';
+            // Estimativa Anexo III para faixa de 300k/ano
+            das = fat * 0.0808; 
+        } else {
+            fill.style.backgroundColor = 'var(--danger)';
+            badge.innerText = 'ANEXO V (Oneroso)';
+            badge.style.backgroundColor = 'var(--danger-bg)';
+            badge.style.color = 'var(--danger)';
+            // Estimativa Anexo V para faixa de 300k/ano
+            das = fat * 0.155;
+        }
+
+        // 2. INSS Pró-labore (11% com teto 2024 de R$ 908,85)
+        const inss = Math.min(pro * 0.11, 908.85);
+
+        // 3. IRPF (Tabela Progressiva 2024 - Simplificada)
+        const baseIrpf = pro - inss;
+        let irpf = 0;
+        if (baseIrpf > 4664.68) irpf = (baseIrpf * 0.275) - 896.00;
+        else if (baseIrpf > 3751.05) irpf = (baseIrpf * 0.225) - 662.77;
+        else if (baseIrpf > 2826.65) irpf = (baseIrpf * 0.15) - 381.44;
+        else if (baseIrpf > 2259.20) irpf = (baseIrpf * 0.075) - 169.44;
+        
+        irpf = Math.max(0, irpf); // Garante que não seja negativo
+
+        // 4. Totais
+        const total = das + inss + irpf;
+        const efetiva = fat > 0 ? (total / fat) * 100 : 0;
+
+        // Atualiza DOM
+        document.getElementById('val-das').innerText = formatCurrency(das);
+        document.getElementById('val-inss').innerText = formatCurrency(inss);
+        document.getElementById('val-irpf').innerText = formatCurrency(irpf);
+        document.getElementById('val-total').innerText = formatCurrency(total);
+        document.getElementById('val-efetiva').innerText = efetiva.toFixed(2) + '%';
+    }
+
+    // Listeners
+    document.getElementById('faturamento').addEventListener('input', calcularTributos);
+    document.getElementById('prolabore').addEventListener('input', calcularTributos);
+
+    // Initial load
+    calcularTributos();
+</script>
+</body>
+</html>
